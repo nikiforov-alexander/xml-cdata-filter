@@ -4,12 +4,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class XmlFilter {
 
     // fields
 
     private Document document;
     private NodeList allNodesList;
+    private Map<String, String> badEntitiesReplacementMap;
 
     // getters and setters
 
@@ -29,16 +33,36 @@ public class XmlFilter {
         this.allNodesList = allNodesList;
     }
 
+    public Map<String, String> getBadEntitiesReplacementMap() {
+        return badEntitiesReplacementMap;
+    }
+
+    public void setBadEntitiesReplacementMap(Map<String, String> badEntitiesReplacementMap) {
+        this.badEntitiesReplacementMap = badEntitiesReplacementMap;
+    }
+
+
     // constructors
 
     public XmlFilter(Document document) {
        this.document = document;
        this.allNodesList = document.getChildNodes();
+       this.badEntitiesReplacementMap = new HashMap<>();
     }
 
     // overrides
 
     // methods
+
+    /**
+     * This method fills {@link #badEntitiesReplacementMap}
+     * with values which will be replaced in &lt;![CDATA[]]&gt;
+     * section. For now only {@literal &apos; -> '} is there.
+     * {@link #badEntitiesReplacementMap} is filled in constructors.
+     */
+    void fillBadEntitiesReplacementMap() {
+        badEntitiesReplacementMap.put("&apos;", "'");
+    }
 
     public Document filter(NodeList nodeList) {
         for (int i = 0; i < nodeList.getLength(); i++) {
