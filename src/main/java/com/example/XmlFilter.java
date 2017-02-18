@@ -44,10 +44,20 @@ public class XmlFilter {
 
     // constructors
 
+    /**
+     * Default constructor, sets up the given {@link #document}
+     * to be filtered for bad entities, {@link #allNodesList}
+     * because we use it in recursive {@link #filter(NodeList)}
+     * function. {@link #badEntitiesReplacementMap} is initialized
+     * here as a new {@code HashMap<String,String>} and filled
+     * with replacement entities by calling {@link #fillBadEntitiesReplacementMap()}.
+     * @param document : Document to be filtered for bad values
+     */
     public XmlFilter(Document document) {
        this.document = document;
        this.allNodesList = document.getChildNodes();
        this.badEntitiesReplacementMap = new HashMap<>();
+       fillBadEntitiesReplacementMap();
     }
 
     // overrides
