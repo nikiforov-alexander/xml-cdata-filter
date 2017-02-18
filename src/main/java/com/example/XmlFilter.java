@@ -127,4 +127,44 @@ public class XmlFilter {
     public void filter() {
         filter(allNodesList);
     }
+
+    // helpful debug methods
+
+    /**
+     * This method <strong>recursively</strong> goes through
+     * the given {@code nodeList} and if the node is
+     * &lt;![CDATA[*]]&gt; node, then he prints it.
+     * NOTE: This simply creates output by adding
+     * parent node name with "<" and ">" and at the end
+     * "</" + ">".
+     * @param nodeList : list of nodes through which we go
+     *                 to look and print
+     */
+    public void printCdataNodesFromNodesList(NodeList nodeList) {
+        for (int i = 0; i < nodeList.getLength(); i++) {
+
+            Node node = nodeList.item(i);
+
+            if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
+                System.out.println("<" + node.getParentNode().getNodeName() + ">" +
+                        node.getTextContent()
+                        + "</" + node.getParentNode().getNodeName() + ">"
+                );
+            }
+
+            if (node.hasChildNodes()) {
+                printCdataNodesFromNodesList(node.getChildNodes());
+            }
+        }
+    }
+
+    /**
+     * This method goes through all the document and prints all
+     * &lt;![CDATA[*]]&gt; nodes, by simply calling
+     * {@link #printCdataNodesFromNodesList(NodeList)}
+     * with {@link #allNodesList}
+     */
+    public void printAllCdataNodes() {
+        printCdataNodesFromNodesList(allNodesList);
+    }
 }
