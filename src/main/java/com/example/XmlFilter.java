@@ -118,6 +118,12 @@ public class XmlFilter {
         }
     }
 
+    /**
+     * This method is default method that can be used by other
+     * program that has {@code Document} to be filtered.
+     * It simply calls {@link #filter(NodeList)} with
+     * {@link #allNodesList} as a parameter.
+     */
     public void filter() {
         filter(allNodesList);
     }
