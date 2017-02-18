@@ -93,6 +93,15 @@ public class XmlFilter {
         return node;
     }
 
+    /**
+     * Filters {@link #document} by given {@code nodeList}.
+     * This method is <strong>recursive</strong> and goes
+     * through all children of given nodes inside {@code nodeList}
+     * If he finds &lt;![CDATA[]]&gt; node, then he calls
+     * {@link #replaceBadEntities(Node)} method.
+     * @param nodeList
+     * @return
+     */
     public Document filter(NodeList nodeList) {
         for (int i = 0; i < nodeList.getLength(); i++) {
 
