@@ -74,14 +74,32 @@ public class XmlFilter {
         badEntitiesReplacementMap.put("&apos;", "'");
     }
 
+    /**
+     * Replaces bad entities that are defined as "keys" in
+     * {@link #badEntitiesReplacementMap} with good entities
+     * that are defined as "values".
+     * @param node : Node to be replaced
+     * @return Node is returned to be replaced in the original
+     * {@link #document}
+     */
+    Node replaceBadEntities(Node node) {
+        for (String badEntity : badEntitiesReplacementMap.keySet()) {
+            String oldTextContent = node.getTextContent();
+            String newEntity = badEntitiesReplacementMap.get(badEntity);
+            node.setTextContent(
+                    oldTextContent.replaceAll(badEntity, newEntity)
+            );
+        }
+        return node;
+    }
+
     public Document filter(NodeList nodeList) {
         for (int i = 0; i < nodeList.getLength(); i++) {
 
             Node node = nodeList.item(i);
 
             if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
-                System.out.println("CDATA " + node.getNodeName()
-                        +  ":" + node.getTextContent());
+                node = replaceBadEntities(node);
             }
 
             if (node.hasChildNodes()) {
