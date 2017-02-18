@@ -16,6 +16,12 @@ public class Main {
 
         XmlFilter xmlFilter = new XmlFilter(document);
 
+        System.out.printf("%nCDATA Nodes before filtering %n%n");
+        xmlFilter.printAllCdataNodes();
+
         xmlFilter.filter();
+
+        System.out.printf("%nCDATA Nodes after filtering%n%n");
+        xmlFilter.printAllCdataNodes();
     }
 }
