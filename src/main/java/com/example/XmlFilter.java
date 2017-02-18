@@ -99,10 +99,11 @@ public class XmlFilter {
      * through all children of given nodes inside {@code nodeList}
      * If he finds &lt;![CDATA[]]&gt; node, then he calls
      * {@link #replaceBadEntities(Node)} method.
-     * @param nodeList
-     * @return
+     * If the node in the list has child nodes he recursively calls
+     * the same method.
+     * @param nodeList : list of nodes through which we go through
      */
-    public Document filter(NodeList nodeList) {
+    public void filter(NodeList nodeList) {
         for (int i = 0; i < nodeList.getLength(); i++) {
 
             Node node = nodeList.item(i);
@@ -115,11 +116,9 @@ public class XmlFilter {
                 filter(node.getChildNodes());
             }
         }
-        return this.document;
     }
 
-    public Document filter() {
+    public void filter() {
         filter(allNodesList);
-        return this.document;
     }
 }
