@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <company>
     <staff id="1001">
-        <firstname><![CDATA[ I&apos;m a king       ]]></firstname>
-        <lastname><![CDATA[ I&apos;m a king       ]]></lastname>
-        <nickname><![CDATA[ I&apos;m a king       ]]></nickname>
-        <salary><![CDATA[ I&apos;m a king       ]]></salary>
+        <firstname id="firstname"><![CDATA[ I&apos;m a king       ]]></firstname>
+        <lastname id="lastname"><![CDATA[ I&apos;m a king       ]]></lastname>
+        <nickname id="nickname"><![CDATA[ I&apos;m a king       ]]></nickname>
+        <salary id="salary"><![CDATA[ I&apos;m a king       ]]></salary>
     </staff>
     <staff id="2001">
         <firstname>low</firstname>
